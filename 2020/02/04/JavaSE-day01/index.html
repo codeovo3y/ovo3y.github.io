@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="JavaSE基础知识-day01计算机的三代语言计算机语言经历了三代：第一代是机器语言，第二代是汇编语言，第三代是高级语言。 ·第一代语言：机器语言(相当于人类的原始阶段)  机器语言由数字组成所有指令。当让你使用数字编程，写几百个数字、甚至几千个数字，每天面对的是纯数字，我大胆预测：“程序员群体100%会有精神问题”。 机器语言通常由数字串组成（最终被简化成01），对于人类来说，机器语言过于繁琐">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaSE-day01">
+<meta property="og:url" content="http://yoursite.com/2020/02/04/JavaSE-day01/index.html">
+<meta property="og:site_name" content="ovo3y&#39;s Blog">
+<meta property="og:description" content="JavaSE基础知识-day01计算机的三代语言计算机语言经历了三代：第一代是机器语言，第二代是汇编语言，第三代是高级语言。 ·第一代语言：机器语言(相当于人类的原始阶段)  机器语言由数字组成所有指令。当让你使用数字编程，写几百个数字、甚至几千个数字，每天面对的是纯数字，我大胆预测：“程序员群体100%会有精神问题”。 机器语言通常由数字串组成（最终被简化成01），对于人类来说，机器语言过于繁琐">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494834483891550.png">
+<meta property="og:image" content="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494836063440655.png">
+<meta property="og:image" content="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494837984812122.png">
+<meta property="og:image" content="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494837979897855.png">
+<meta property="og:image" content="c:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505058846.png">
+<meta property="og:image" content="c:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505171419.png">
+<meta property="og:image" content="c:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505238879.png">
+<meta property="og:image" content="c:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505397039.png">
+<meta property="og:image" content="c:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505513782.png">
+<meta property="og:image" content="c:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505671640.png">
+<meta property="og:image" content="c:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505716716.png">
+<meta property="og:image" content="c:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579506683498.png">
+<meta property="og:image" content="c:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579506801514.png">
+<meta property="og:image" content="c:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579506938628.png">
+<meta property="og:image" content="c:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579507508668.png">
+<meta property="og:image" content="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494840217176085.png">
+<meta property="og:image" content="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494840205551048.png">
+<meta property="og:image" content="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494840197751869.png">
+<meta property="article:published_time" content="2020-02-04T09:39:08.595Z">
+<meta property="article:modified_time" content="2020-01-20T14:25:03.042Z">
+<meta property="article:author" content="ovo3y">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494834483891550.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/04/JavaSE-day01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JavaSE-day01 | ovo3y's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ovo3y's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">你不会找到路，除非你敢于迷路</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">4</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/04/JavaSE-day01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.JPG">
+      <meta itemprop="name" content="ovo3y">
+      <meta itemprop="description" content="Believe in yourself">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ovo3y's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaSE-day01
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-04 17:39:08" itemprop="dateCreated datePublished" datetime="2020-02-04T17:39:08+08:00">2020-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-20 22:25:03" itemprop="dateModified" datetime="2020-01-20T22:25:03+08:00">2020-01-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="JavaSE基础知识-day01"><a href="#JavaSE基础知识-day01" class="headerlink" title="JavaSE基础知识-day01"></a>JavaSE基础知识-day01</h1><h2 id="计算机的三代语言"><a href="#计算机的三代语言" class="headerlink" title="计算机的三代语言"></a>计算机的三代语言</h2><p><strong>计算机语言经历了三代：第一代是机器语言，第二代是汇编语言，第三代是高级语言。</strong></p>
+<p><strong>·第一代语言：机器语言(相当于人类的原始阶段)</strong></p>
+<ul>
+<li>机器语言由数字组成所有指令。当让你使用数字编程，写几百个数字、甚至几千个数字，每天面对的是纯数字，我大胆预测：“程序员群体100%会有精神问题”。</li>
+<li>机器语言通常由数字串组成（最终被简化成01），对于人类来说，机器语言过于繁琐。使用机器语言，人类无法编出复杂的程序。如下为一段典型的机器码：</li>
+<li>\1. 0000,0000,000000010000 代表 LOAD A, 16</li>
+<li>\2. 0000,0001,000000000001 代表 LOAD B, 1</li>
+<li>\3. 0001,0001,000000010000 代表 STORE B, 16</li>
+</ul>
+<p><strong>·第二代语言：汇编语言（相当于人类的手工业阶段）</strong></p>
+<ul>
+<li>程序员开始改进机器语言，使用英文缩写的助记符来表示基本的计算机操作，   汇编语言虽然能编写高效率的程序，但是学习和使用都不是易事，并且很难调试。</li>
+<li>另一个复杂的问题，汇编语言以及早期的计算机语言（Basic、Fortran等）没有考虑结构化设计原则，而是使用goto语句来作为程序流程控制的主要方法。这样做的后果是：一大堆混乱的调转语句使得程序几乎不可能被读懂。对于那个时代的程序员，能读懂上个月自己写的代码都成为一种挑战。</li>
+<li>汇编语言仍然应用于工业电子编程领域、软件的加密解密、计算机病毒分析等。</li>
+</ul>
+<p><strong>第三代：高级语言（相当于人类的工业阶段</strong></p>
+<ul>
+<li><p>对于简单的任务，汇编语言可以胜任。但是随着计算机的发展，渗透到了工作生活的更多的方面，一些复杂的任务出现了，汇编语言就显得力不从心（应该说是程序员使用汇编语言解决复杂问题出现了瓶颈）。于是，出现了高级语言。像我们熟知的C、C++、Java等等都是高级语言</p>
+</li>
+<li><p><img src="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494834483891550.png" alt="图片3.png"></p>
+</li>
+<li><p>从上面这个简单的加法计算，可以看出越到高级语言，越接近人的思维，人使用起来就越方便。</p>
+</li>
+<li><p>​      高级语言的出现，尤其是面向对象语言的出现，相当于人类的工业社会，高级语言极其易用，编程门槛和难度大大降低，大量的人员进入软件开发行业，为软件爆发性的增长提供了充足的人力资源。目前以及可预见的将来，计算机语言仍然处于“第三代高级语言”阶段。</p>
+</li>
+</ul>
+<h2 id="常见编程语言-认识即可"><a href="#常见编程语言-认识即可" class="headerlink" title="常见编程语言(认识即可)"></a>常见编程语言(认识即可)</h2><p><strong>C语言</strong></p>
+<p>​      C语言诞生于1972年，可以称之为现代高级语言的鼻祖，由著名的贝尔实验室发明。C语言是人们追求结构化、模块化、高效率的“语言之花”。在底层编程，比如嵌入式、病毒开发等应用，可以替代汇编语言来开发系统程序。在高层应用，也可以开发从操作系统(Unix/Linux/Windows都基于C语言开发)到各种应用软件。</p>
+<p><strong>C++语言</strong></p>
+<p>​      作为C语言的扩展，C++是贝尔实验室于80年代推出的。C++是一种混合语言，既可以实现面向对象编程，也可以开发C语言面向过程风格的程序。</p>
+<p>​      C语言让程序员第一次可以通过结构化的理念编写出易于理解的复杂程序； 尽管C语言是一个伟大的语言，但是程序的代码量达到30000行以上时，程序员就不能很好的从总体上把握和控制这个程序。 因此，在80年代初期，很多软件项目都面临无法解决的问题而不能顺利进行。 1979年，贝尔实验室发明了C++。 C++最初的名字叫做“带类的C”，后来才改名叫C++。国内通用叫法：“C加加”,国际通用读法“C plus plus”。</p>
+<p>​      C++语言在科学计算、操作系统、网络通讯、系统开发、引擎开发中仍然被大量使用。</p>
+<p><strong>Java语言</strong></p>
+<p>​      由美国SUN公司发明于1995年，是目前业界应用最广泛、使用人数最多的语言，连续多年排名世界第一，可以称之为“计算机语言界的英语”。</p>
+<p>​      Java广泛应用于企业级软件开发、安卓移动开发、大数据云计算等领域，几乎涉及IT所有行业。关于Java的发展历史和特性，将在后面专门介绍。</p>
+<p><strong>PHP语言</strong></p>
+<p>​      PHP原始为Personal Home Page的缩写，已经正式更名为 “PHP: Hypertext Preprocessor”。PHP语言，一般用于WEB开发领域；大量的中小型网站以及某些大型网站使用PHP开发。</p>
+<p><strong>Object-C和Swift语言</strong></p>
+<p>​      Object-C通常写作Objective-C或者Obj-C或OC，是根据C语言所衍生出来的语言，继承了C语言的特性，是扩充C的面向对象编程语言。OC主要用于苹果软件的开发。</p>
+<p>​      Swift，苹果于2014年WWDC（苹果开发者大会）发布的新开发语言，可与OC共同运行于Mac OS和iOS平台，用于搭建基于苹果平台的应用程序。</p>
+<p><strong>JavaScript语言</strong></p>
+<p>​      JavaScript是一种脚本语言,已经被广泛用于Web应用开发；应用范围越来越大，重要性越来越高。目前，流行的H5开发的核心其实就是JavaScript语言。</p>
+<p><strong>Python语言</strong></p>
+<p>​      Python发明于1989年，语法结构简单，易学易懂；Python具有丰富和强大的库。它常被昵称为胶水语言，能够把用其他语言制作的各种模块（尤其是C/C++）很轻松地联结在一起。Python广泛应用于：图形处理、科学计算、web编程、多媒体应用、引擎开发；尤其是在未来大热方向机器学习和人工智能上有非常大的潜力。</p>
+<p><strong>C#语言</strong></p>
+<p>​      C#是微软公司发布的一种面向对象的、运行于.NET Framework之上的高级程序设计语言。C#在基于windows操作系统的应用开发这一领域在取代C++，占据主导地位。“成也萧何败也萧何”，C#的微软身份，也成为了发展的阻力，在其他IT领域应用较少。</p>
+<p><strong>Fortran语言</strong></p>
+<p>​      世界上第一种高级语言， IBM公司在1954年提出的，主要用在需要复杂数学计算的科学和工程领域。现在仍然被广泛使用，尤其是工程领域。Fortran虽然适合编写科学计算方面的程序，但是不适于编写系统程序。</p>
+<p><strong>Basic语言</strong></p>
+<p>​      虽然易学，但功能不够强大，应用到大程序的有效性令人怀疑。已经逐步退出历史舞台。</p>
+<p><strong>COBOL语言</strong></p>
+<p>​      于1959年提出。主要用于大量精确处理数据的商业领域中，比如金融、银行。今天，仍然有超过一半的商业软件使用COBOL编写。有将近100万人使用COBOL编程。</p>
+<p><strong>Pascal语言</strong></p>
+<p>​      Pascal的名称是为了纪念十七世纪法国著名哲学家和数学家Blaise Pascal而来的，它由瑞士Niklaus Wirth教授于六十年代末设计并创立的。Pascal语言语法严谨，层次分明，程序易写，可读性强，是第一个结构化编程语言。由于没有大厂商和政府的支持，只是限于大学教育这一块。</p>
+<h2 id="Java发展史-没意义-反正记不住"><a href="#Java发展史-没意义-反正记不住" class="headerlink" title="Java发展史(没意义 反正记不住)"></a>Java发展史(没意义 反正记不住)</h2><p>1991年，James Gosling在SUN公司的工程师小组想要设计这样一种小型计算机语言。该语言主要用于像电视盒这样的消费类电子产品。另外，由于不同的厂商选择不同的CPU和操作系统，因此，要求该语言不能和特定的体系结构绑在一起，要求语言本身是中立的，也就是跨平台的。所以，将这个语言命名为“Green”，类似于绿色软件的意思。后来，改名为Oak，橡树的意思。改名后发现已经有一种语言叫这个名字了，再改名叫Java。Java语言发展到今天经历了一系列的过程：</p>
+<ul>
+<li>​      1991年，SUN公司的Green项目，Oak</li>
+<li>​      1995年，推出Java测试版</li>
+<li>​      1996年，JDK1.0</li>
+<li>​      1997年，JDK1.1</li>
+<li>​      1998年，JDK1.2，大大改进了早期版本缺陷，是一个革命性的版本，更名为Java2。</li>
+<li>​      2004年，J2SE 5.0 (1.5.0) Tiger老虎</li>
+<li>​      2006年，J2SE 6.0 (1.6.0) Mustang野马</li>
+<li>​      2011年，JavaSE7.0 Dolphin海豚</li>
+<li>​      2014年，JavaSE8.0</li>
+</ul>
+<h2 id="Java核心优势"><a href="#Java核心优势" class="headerlink" title="Java核心优势"></a>Java核心优势</h2><p>记住一点：跨平台！！ </p>
+<p>因为有 JVM（也就是虚拟机）</p>
+<p>解释：Java编写的代码在虚拟机内进行编译后再由虚拟机执行 所以那个平台都可以使用,即为跨平台</p>
+<ul>
+<li>　跨平台是Java语言的核心优势，赶上最初互联网的发展，并随着互联网的发展而发展，建立了强大的生态体系，目前已经覆盖IT各行业的“第一大语言”，是计算机界的“英语”。</li>
+<li>　　虽然，目前也有很多跨平台的语言，但是已经失去先机，无法和Java强大的生态体系抗衡。Java仍将在未来几十年成为编程语言的主流语言。</li>
+</ul>
+<h2 id="JavaSE-JavaEE-JavaME区别"><a href="#JavaSE-JavaEE-JavaME区别" class="headerlink" title="JavaSE/JavaEE/JavaME区别"></a>JavaSE/JavaEE/JavaME区别</h2><ul>
+<li>javase: 即J2SE, java标准版, 主要做一般的java应用, 比如, 应用软件/ QQ之类的通信软件等等.</li>
+<li>javaee: 即J2EE, 主要做企业应用, 比如公司网站, 企业解决方案等;</li>
+<li>javame: 即J2ME, 主要面向嵌入式等设备应用的开发, 比如手机游戏等.</li>
+</ul>
+<h2 id="Java的特性和优势"><a href="#Java的特性和优势" class="headerlink" title="Java的特性和优势"></a><strong>Java的特性和优势</strong></h2><ul>
+<li><p>跨平台/可移植性</p>
+</li>
+<li><p>安全性</p>
+</li>
+<li><p>面向对象</p>
+</li>
+<li><p>简单性</p>
+</li>
+<li><p>高性能</p>
+</li>
+<li><p>分布式</p>
+</li>
+<li><p>多线程</p>
+</li>
+<li><p>健壮性</p>
+</li>
+</ul>
+<h2 id="Java应用程序的运行机制"><a href="#Java应用程序的运行机制" class="headerlink" title="Java应用程序的运行机制"></a><strong>Java应用程序的运行机制</strong></h2><p>  计算机高级语言的类型主要有编译型和解释型两种，而Java 语言是两种类型的结合。</p>
+<p>​      Java首先利用文本编辑器编写 Java源程序，源文件的后缀名为.java；再利用编译器（javac）将源程序编译成字节码文件，字节码文件的后缀名为.class； 最后利用虚拟机（解释器，java）解释执行。</p>
+<p><img src="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494836063440655.png" alt="图片6.png"></p>
+<h2 id="JVM、JRE和JDK"><a href="#JVM、JRE和JDK" class="headerlink" title="JVM、JRE和JDK"></a><strong>JVM、JRE和JDK</strong></h2><ul>
+<li>JVM(Java Virtual Machine)就是一个虚拟的用于执行bytecode字节码的”虚拟计算机”。他也定义了指令集、寄存器集、结构栈、垃圾收集堆、内存区域。JVM负责将Java字节码解释运行，边解释边运行，这样，速度就会受到一定的影响。</li>
+<li>不同的操作系统有不同的虚拟机。Java 虚拟机机制屏蔽了底层运行平台的差别，实现了“一次编译，随处运行”。 Java虚拟机是实现跨平台的核心机制。如图1-6所示。</li>
+</ul>
+<p><img src="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494837984812122.png" alt="图片8.png"></p>
+<ul>
+<li>Java Runtime Environment (JRE) 包含：Java虚拟机、库函数、运行Java应用程序所必须的文件。</li>
+<li>Java  Development Kit (JDK)包含：包含JRE，以及增加编译器和调试器等用于程序开发的文件。</li>
+<li>JDK、JRE和JVM的关系如图1-7所示。</li>
+</ul>
+<p><img src="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494837979897855.png" alt="图片7.png"></p>
+<h2 id="下载JDK和安装"><a href="#下载JDK和安装" class="headerlink" title="下载JDK和安装"></a>下载JDK和安装</h2><ul>
+<li><strong>下载</strong></li>
+</ul>
+<blockquote>
+<p><a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="noopener">https://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
+</blockquote>
+<p><img src="C:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505058846.png" alt="1579505058846"></p>
+<p><img src="C:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505171419.png" alt="1579505171419"></p>
+<p><img src="C:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505238879.png" alt="1579505238879"></p>
+<p>无论是解压或者压缩 我希望大家最好是能放在一个专门用来学习的地方</p>
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p><img src="C:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505397039.png" alt="1579505397039"></p>
+<p>无论WIN7 和 WIN10 找环境变量应该没啥问题把</p>
+<p>不知道的百度~</p>
+<p>下面进入环境变量 开始创建啦</p>
+<p><img src="C:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505513782.png" alt="1579505513782"></p>
+<p>2.</p>
+<p><img src="C:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505671640.png" alt="1579505671640"></p>
+<p>点完确定后</p>
+<p><img src="C:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579505716716.png" alt="1579505716716"></p>
+<p>找到cmd 输入 java</p>
+<p>出现这样 就是安装成功啦</p>
+<h2 id="编写第一个java程序"><a href="#编写第一个java程序" class="headerlink" title="编写第一个java程序"></a>编写第一个java程序</h2><p>在你的学习盘下建立文件夹mycode，用于保存学习的代码。比如我的是F:/myJavaCode,然后在这里创建一个txt文件，名字为Hello.java（后缀名将txt-&gt;java）和创建html一样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello java"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579506683498.png" alt="1579506683498"></p>
+<p>2.打开cmd，进入myJavaCode目录</p>
+<p><img src="C:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579506801514.png" alt="1579506801514"></p>
+<p>3.javac 编译文件 java 运行编译后的class文件</p>
+<p><img src="C:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579506938628.png" alt="1579506938628"></p>
+<p><img src="C:%5CUsers%5Cacer%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1579507508668.png" alt="1579507508668"></p>
+<h2 id="第一个程序常见错误"><a href="#第一个程序常见错误" class="headerlink" title="第一个程序常见错误"></a>第一个程序常见错误</h2><p><strong>·常见问题-1：提示“javac不是内部或外部命令……”</strong></p>
+<p><img src="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494840217176085.png" alt="1.png"></p>
+<p>图1-22常见错误-1</p>
+<p><strong>出错原因：</strong>Path变量配置错误导致没有找到javac命令</p>
+<p><strong>解决方案：</strong>参考1.4.2 &lt;环境变量Path的配置&gt;，细心重新设置Path，配置完成后需要重新输入cmd打开命令行窗口。</p>
+<p><strong>·常见问题-2：文件夹中可以看到Welcome.java文件，在编译时出现’javac 找不到文件……’</strong></p>
+<p><img src="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494840205551048.png" alt="2.png"></p>
+<p>图1-23常见错误-2</p>
+<p><strong>出错原因：</strong>可能是操作系统显示设置的问题，隐藏了文件的扩展名。</p>
+<p><strong>解决方案：</strong>打开我的电脑窗口,选择【组织】【文件夹和搜索选项】【查看】，如图1-24所示，去掉“隐藏已知文件夹类型的扩展名”复选框中的对勾，看到文件的实际名称为Welcome.java.txt，将后缀后.txt去掉。</p>
+<p><img src="https://www.sxt.cn/360shop/Public/admin/UEditor/20170515/1494840197751869.png" alt="3.png"></p>
+<p>图1-24 常见问题-2解决方案</p>
+<p><strong>·常见问题-3：NoSuchMethodError：main</strong></p>
+<p><strong>出错原因：</strong>找不到main方法，应该是main方法书写有误。</p>
+<p><strong>解决方案：</strong>检查public static void main(String [] args){}是否有误。</p>
+<h2 id="第一个Java程序的总结和提升"><a href="#第一个Java程序的总结和提升" class="headerlink" title="第一个Java程序的总结和提升"></a><strong>第一个Java程序的总结和提升</strong></h2><p>1.Java对大小写敏感，如果出现了大小写拼写错误，程序无法运行。</p>
+<p>2.关键字public被称作访问修饰符(access modifier)，用于控制程序的其它部分对这段代码的访问级别。</p>
+<p>3.关键字class 的意思是类。Java是面向对象的语言，所有代码必须位于类里面。</p>
+<p>4.一个源文件中至多只能声明一个public的类，其它类的个数不限，如果源文件中包含一个public 类，源文件名必须和其中定义的public的类名相同，且以“.java”为扩展名。</p>
+<p>5.一个源文件可以包含多个类class。</p>
+<p>6.正确编译后的源文件，会得到相应的字节码文件，编译器为每个类生成独立的字节码文件，且将字节码文件自动命名为类的名字且以“.class”为扩展名。</p>
+<p>7.main方法是Java应用程序的入口方法，它有固定的书写格式：</p>
+<p>8.public static void main(String[]  args) {…} </p>
+<p>9.在Java中，用花括号划分程序的各个部分，任何方法的代码都必须以“{”开始，以“}”结束， 由于编译器忽略空格，所以花括号风格不受限制。</p>
+<p>10.Java中每个语句必须以分号结束，回车不是语句的结束标志，所以一个语句可以跨多行。</p>
+<p><strong>老鸟建议：</strong></p>
+<p>​      <strong>·</strong>编程时，一定要注意缩进规范；</p>
+<p>​      <strong>·</strong>在写括号、引号时，一定是成对编写，然后再往里插入内容。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/04/JavaSE-day03/" rel="prev" title="JavaSE-day03">
+      <i class="fa fa-chevron-left"></i> JavaSE-day03
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaSE基础知识-day01"><span class="nav-number">1.</span> <span class="nav-text">JavaSE基础知识-day01</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机的三代语言"><span class="nav-number">1.1.</span> <span class="nav-text">计算机的三代语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见编程语言-认识即可"><span class="nav-number">1.2.</span> <span class="nav-text">常见编程语言(认识即可)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java发展史-没意义-反正记不住"><span class="nav-number">1.3.</span> <span class="nav-text">Java发展史(没意义 反正记不住)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java核心优势"><span class="nav-number">1.4.</span> <span class="nav-text">Java核心优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaSE-JavaEE-JavaME区别"><span class="nav-number">1.5.</span> <span class="nav-text">JavaSE&#x2F;JavaEE&#x2F;JavaME区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java的特性和优势"><span class="nav-number">1.6.</span> <span class="nav-text">Java的特性和优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java应用程序的运行机制"><span class="nav-number">1.7.</span> <span class="nav-text">Java应用程序的运行机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM、JRE和JDK"><span class="nav-number">1.8.</span> <span class="nav-text">JVM、JRE和JDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载JDK和安装"><span class="nav-number">1.9.</span> <span class="nav-text">下载JDK和安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置环境变量"><span class="nav-number">1.10.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写第一个java程序"><span class="nav-number">1.11.</span> <span class="nav-text">编写第一个java程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个程序常见错误"><span class="nav-number">1.12.</span> <span class="nav-text">第一个程序常见错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个Java程序的总结和提升"><span class="nav-number">1.13.</span> <span class="nav-text">第一个Java程序的总结和提升</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ovo3y"
+      src="/images/touxiang.JPG">
+  <p class="site-author-name" itemprop="name">ovo3y</p>
+  <div class="site-description" itemprop="description">Believe in yourself</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ovo3y" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ovo3y" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/ovo3y" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;ovo3y" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ovo3y</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
